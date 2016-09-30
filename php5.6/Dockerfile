@@ -8,13 +8,10 @@ ENV TIMEZONE=UTC \
 	PHP_MEMORY_LIMIT=512M \
 	MAX_UPLOAD=50M \
 	PHP_INI=/etc/php5/php.ini \
-	DEL_PAK=tzdata 
-
+	PORT=80
 
 # instal PHP
-RUN	apk update && \
-	apk upgrade && \
-	apk add --no-cache \
+RUN	apk add --no-cache \
 		libmemcached-libs \
 	#php and ext
 		php5-mcrypt \
@@ -48,7 +45,6 @@ RUN	apk update && \
 	CHANGE_INI display_errors 1 && \
 	CHANGE_INI display_startup_errors 1 && \
 	# Clean
-	apk del ${DEL_PAK} && \
 	rm -rf /var/cache/* /var/tmp/* /tmp/* /etc/ssl/* /usr/include/*
 
 #COPY build extensions 
@@ -57,4 +53,9 @@ COPY modules/ /usr/lib/php5/modules/
 
 WORKDIR /newfuture/yaf
 
-CMD ["php", "-S", "0.0.0.0:80"]
+EXPOSE $PORT
+
+# if exist public and not exist index.php ,use the public as web root
+CMD [ ! -f index.php ] && [ -d public ] && \
+	php -t public/ -S 0.0.0.0:$PORT || \ 
+	php -S 0.0.0.0:$PORT
