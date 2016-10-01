@@ -15,7 +15,7 @@ cd "/tmp/$1" && \
 phpize && \
 ./configure --with-php-config=php-config && \
 make && \
-cp /tmp/$1/modules/*.so /newfuture/yaf/; \
+cp /tmp/$1/modules/*.so /newfuture/yaf/modules/; \
 };
 
 BUILD yaf-2.3.5;
