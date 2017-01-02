@@ -68,10 +68,12 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 	# Clean
 	&& rm -rf /var/cache/apk/* \
 		/var/tmp/* \
-		# /etc/ssl/* \
-		/etc/init.d/php-fpm \
-		/usr/include/* \
-		/tmp/* 
+		/tmp/* \		
+		/etc/ssl/certs/*.pem \
+		/etc/ssl/certs/*.0 \
+		/usr/share/ca-certificates/mozilla/* \
+		/usr/share/man/* \
+		/usr/include/* 
 
 EXPOSE $FPM_PORT
 

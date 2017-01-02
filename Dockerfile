@@ -50,8 +50,11 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 	&& rm -rf /var/cache/apk/* \
 		/var/tmp/* \
 		/tmp/* \
-		# /etc/ssl/* \
-		/usr/include/*
+		/etc/ssl/certs/*.pem \
+		/etc/ssl/certs/*.0 \
+		/usr/share/ca-certificates/mozilla/* \
+		/usr/share/man/* \
+		/usr/include/*		
 
 #COPY build extensions 
 COPY fpm/modules/*.so /usr/lib/php5/modules/
