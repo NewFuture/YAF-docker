@@ -47,7 +47,11 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 	&& ADD_EXT memcached \
 	&& ADD_EXT yaf "[yaf]\\nyaf.environ = dev" \
 	# ClEAN
-	&& rm -rf /var/cache/apk/* /var/tmp/* /tmp/* /etc/ssl/* /usr/include/*
+	&& rm -rf /var/cache/apk/* \
+		/var/tmp/* \
+		/tmp/* \
+		# /etc/ssl/* \
+		/usr/include/*
 
 #COPY build extensions 
 COPY fpm/modules/*.so /usr/lib/php5/modules/
