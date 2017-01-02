@@ -4,9 +4,9 @@ MAINTAINER New Future <docker@newfuture.cc>
 LABEL Name="YAF-docker" Description="mimimal docker image for PHP YAF"
 
 # Environments
-ENV TIMEZONE=UTC \
-	MAX_UPLOAD=50M \
-	PORT=80
+ENV PORT=80 \
+	TIMEZONE=UTC \
+	MAX_UPLOAD=50M 
 
 # instal PHP
 RUN	PHP_INI='/etc/php5/php.ini' \
