@@ -10,7 +10,7 @@ ENV TIMEZONE=UTC \
 
 # instal PHP
 RUN	PHP_INI=/etc/php5/php.ini \
-	PHP_INI=/etc/php5/php.ini \
+	&& PHP_CONF='/etc/php7/conf.d/' \
 	&& apk add --no-cache \
 		libmemcached-libs \
 	#php and ext
@@ -44,7 +44,7 @@ RUN	PHP_INI=/etc/php5/php.ini \
 	&& CHANGE_INI display_startup_errors 1 \
 	&& ADD_EXT(){ echo "extension = ${1}.so; \\n${2}" > "$PHP_CONF/90_${1}.ini"; } \
 	&& ADD_EXT redis \
-	&& ADD_EXT memcached	
+	&& ADD_EXT memcached \
 	&& ADD_EXT yaf "[yaf]\\nyaf.environ = dev" \
 	# ClEAN
 	&& rm -rf /var/cache/apk/* /var/tmp/* /tmp/* /etc/ssl/* /usr/include/*
