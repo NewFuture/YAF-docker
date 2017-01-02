@@ -9,8 +9,8 @@ ENV TIMEZONE=UTC \
 	PORT=80
 
 # instal PHP
-RUN	PHP_INI=/etc/php5/php.ini \
-	&& PHP_CONF='/etc/php7/conf.d/' \
+RUN	PHP_INI='/etc/php5/php.ini' \
+	&& PHP_CONF='/etc/php5/conf.d' \
 	&& apk add --no-cache \
 		libmemcached-libs \
 	#php and ext
