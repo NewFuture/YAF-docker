@@ -37,8 +37,7 @@ based on alpine (the mini size docke image)
 ```
 docker pull newfuture/yaf
 ```
-* run your yaf app : replace `"/PATH/OF/YAF/APP/"` with your app path , and it will auto detect public path (if exist `public folder` and not exist `index.php` ,use the `public` as web root
-)
+* run your yaf app : replace `"/PATH/OF/YAF/APP/"` with your app path , and it will auto detect public path (if exist `public folder` and not exist `index.php` ,use the `public` as web root)
 ```bash
 docker run --name yaf -p 1122:80 -v "/PATH/OF/YAF/APP/":/newfuture/yaf newfuture/yaf
 ```
@@ -48,5 +47,5 @@ docker run -it --rm newfuture/yaf php -a
 ```
 * using php7
 ```bash
-docker run -it --rm yaf -p 1122:80 -v "`pwd`":/newfuture/yaf newfuture/yaf:php7
+docker run -it --rm -p 1122:80 -v "`pwd`":/newfuture/yaf newfuture/yaf:php7
 ```
