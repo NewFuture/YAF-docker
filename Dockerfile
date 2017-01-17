@@ -54,7 +54,7 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 		/etc/ssl/certs/*.0 \
 		/usr/share/ca-certificates/mozilla/* \
 		/usr/share/man/* \
-		/usr/include/*		
+		/usr/include/*
 
 #COPY build extensions 
 COPY fpm/modules/*.so /usr/lib/php5/modules/
