@@ -61,10 +61,10 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 	&& CHANGE_INI cgi.fix_pathinfo 0 \
 	&& CHANGE_INI display_errors 1 \
 	&& CHANGE_INI display_startup_errors 1 \
-	&& ADD_EXT(){ echo -e "extension = ${1}.so; \\n${2}" > "/etc/php5/conf.d/90_${1}.ini"; } \
+	&& ADD_EXT(){ echo -e "extension = ${1}.so; \n${2}" > "/etc/php5/conf.d/90_${1}.ini"; } \
 	&& ADD_EXT redis \
 	&& ADD_EXT memcached \
-	&& ADD_EXT yaf "[yaf]\\nyaf.environ = dev" \
+	&& ADD_EXT yaf "[yaf]\nyaf.environ = dev" \
 	# Clean
 	&& rm -rf /var/cache/apk/* \
 		/var/tmp/* \
