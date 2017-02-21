@@ -20,7 +20,7 @@ script:
 # 环境设置
 env:
   global: # 使用secure加密方式添加secure字段
-    - BUILD_PATH: "docs" #the build folder to deploy[生成发布的目录] 
+    - BUILD_PATH: "docker" #the build folder to deploy[生成发布的目录] 
     - GIT_AUTHOR_NAME: "NewFuture" #username[用户名]
     - GH_BRANCH: "docker" #branches to push
     # - secure: (encrypted string: GH_TOKEN=xxx])
