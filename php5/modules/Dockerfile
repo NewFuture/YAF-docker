@@ -21,9 +21,8 @@ RUN apk add \
         re2c
 
 RUN apk add \
-        "$PHP" \
-        "$PHP-dev" \
-        "$PHP-session"
+        "${PHP}" \
+        "${PHP}-dev"
 
 RUN  BUILD(){ \
         curl -#SL https://pecl.php.net/get/$1.tgz | tar zx -C $TMP \
