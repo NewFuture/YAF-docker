@@ -15,7 +15,6 @@ before_script:
 # 下面替换成运行生成命令或者脚本
 script:
   - ./build.sh php5
-  - cp -R php5/modules docker/php5/
   - cp php5/Dockerfile docker/php5/cli/
 
 # 环境设置

@@ -15,8 +15,8 @@ BUILD(){ \
     curl -#SL https://pecl.php.net/get/$1.tgz | tar zx -C "/tmp/" && \
     cd "/tmp/$1" && \
     phpize && \
-    ./configure --with-php-config=php-config && \
-    make && make test &&  \
+    ./configure --with-php-config=php-config5 && \
+    make && make \
     cp /tmp/$1/modules/*.so /run/modules/; \
 };
 
