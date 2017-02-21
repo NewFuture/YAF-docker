@@ -9,13 +9,11 @@ services:
 # dist: trusty (Ubuntu 16.04)
 
 before_script:
-  - mkdir -p docker/php5/cli
   - docker pull alpine
 
 # 下面替换成运行生成命令或者脚本
 script:
   - ./build.sh php5
-  - cp php5/Dockerfile docker/php5/cli/
 
 # 环境设置
 env:

@@ -1,4 +1,5 @@
 FROM alpine
+
 ENV TMP="/tmp/" \
     DIR="/newfuture/yaf" \
     PHP="php5"
@@ -33,3 +34,5 @@ RUN  BUILD(){ \
         && BUILD redis-3.1.1 \
         && BUILD yaf-2.3.5 \
         && BUILD memcached-2.2.0
+
+CMD cp -R $DIR /modules/
