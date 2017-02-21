@@ -1,3 +1,4 @@
+#!/bin/sh
 
 apk add --update \
     php5 \
