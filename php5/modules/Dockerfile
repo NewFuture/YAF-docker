@@ -18,7 +18,9 @@ RUN apk add \
         gcc \
         make \
         zlib-dev \
-        re2c
+        re2c \
+        libmemcached-dev \
+        cyrus-sasl-dev
 
 RUN apk add \
         "${PHP}" \
