@@ -1,3 +1,3 @@
 #!/bin/sh
-mkdir php5/modules
-docker run --it --rm -v"$(pwd)"/php5:/run/ alpine /run/buildext.sh
+mkdir "$1/modules/"
+docker run -it --rm -v"$(pwd)/$1":/run/ alpine /run/buildext.sh
