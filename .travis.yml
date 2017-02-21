@@ -10,6 +10,7 @@ services:
 
 before_script:
   - mkdir -p docker/php5/cli
+  - docker pull alpine
 
 # 下面替换成运行生成命令或者脚本
 script:
