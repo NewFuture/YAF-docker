@@ -35,4 +35,4 @@ RUN  BUILD(){ \
         && BUILD yaf-2.3.5 \
         && BUILD memcached-2.2.0
 
-CMD cp -R $DIR /modules/
+CMD cp -R $DIR/* /modules/
