@@ -1,0 +1,85 @@
+#Reference from https://github.com/NewFuture/travis-page
+sudo: required
+
+services:
+  - docker
+
+# 一下基本设置
+# language: 语言如python,ruby,node_js
+# dist: trusty (Ubuntu 16.04)
+
+before_script:
+  - mkdir -p docker/php5/cli
+
+# 下面替换成运行生成命令或者脚本
+script:
+  - ./build.sh
+  - cp php5/modules docker/php5/
+  - cp php5/Dockerfile docker/php5/cli/
+
+# 环境设置
+env:
+  global: # 使用secure加密方式添加secure字段
+    - BUILD_PATH: "docs" #the build folder to deploy[生成发布的目录] 
+    - GIT_AUTHOR_NAME: "NewFuture" #username[用户名]
+    - GH_BRANCH: "docker" #branches to push
+    # - secure: (encrypted string: GH_TOKEN=xxx])
+    # auto generation and detection 默认下面变量会自动配置GIT变量
+    - GIT_REF: "$(git ls-remote --get-url)" #git地址默认当前仓库，可修改为其他仓库
+    - GIT_ADD_PARAMS: "." #git add参数或者跟踪的文件[.]只增不删[-u]只删改不增[-A]全部
+    - GIT_AUTHOR_EMAIL: "${GIT_AUTHOR_NAME}@users.noreply.github.com"
+    - GIT_COMMITTER_NAME: "${GIT_AUTHOR_NAME}"
+    - GIT_COMMITTER_EMAIL: "${GIT_COMMITTER_NAME}@users.noreply.github.com"
+
+# 可选设置
+# #运行Travis的分支
+branches: 
+  only: #只build master
+  - master
+
+# #git clone目录深度
+# #clone 目录深度 1 提高速度
+# git: 
+#   depth: 1
+
+
+
+#############################################################
+#############    下面默认根据配置自动处理不用修改    #############
+#############################################################
+
+#运行成功后,把生成目录(BUILD_PATH)下的文件发布到指定分支(GH_BRANCH)，
+#默认增量修改(只增加不删除),要删除[git add .]改成[git add -A]
+after_success:
+  - cd "${BUILD_PATH}" || cd "${TRAVIS_BUILD_DIR}/${BUILD_PATH}" 
+  - test ${TRAVIS_PULL_REQUEST} == true || git init # not update pull request 
+  - git remote add new ${GIT_REF} && git fetch new --depth=1
+  - if [ "`git branch -r --list new/${GH_BRANCH}`" ] ; then
+      git reset new/${GH_BRANCH};
+    else
+      git checkout -b ${GH_BRANCH};
+    fi;
+  - git add $GIT_ADD_PARAMS
+  - git commit -m"build $(date -I)[skip ci]" &&git push new HEAD:${GH_BRANCH} -q
+
+
+#所有脚本和安装之前
+# 1.检查git的URL和验证方式
+# 2. 检查创建目录
+before_install:
+  # 检查验证方式token或者RSAKEY
+  - if [ $GH_TOKEN ]; then
+      GIT_REF=`sed "s#://#&${GH_TOKEN}@#"<<<$GIT_REF`;
+    else
+      GIT_REF=`sed -e 's#^https://#git@#' -e 's#/#:#'<<<$GIT_REF`;
+      base64 -d <<<$RSAKEY>~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa;
+    fi;
+  # 检查路径不存在时，不存在自动创建
+  - test -d "$BUILD_PATH" || mkdir -p "$BUILD_PATH" 
+
+
+# 通知
+notifications:
+  email:
+    on_failure: change
+    on_success: change

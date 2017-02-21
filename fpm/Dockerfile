@@ -6,7 +6,7 @@ LABEL Name="YAF-docker" Description="mimimal docker image for PHP YAF with php-f
 ENV FPM_PORT=9000 \
 	FPM_USER=www-data \
 	TIMEZONE=UTC \
-	MAX_UPLOAD=50M 	
+	MAX_UPLOAD=50M
 	
 # instal PHP-fpm
 RUN	PHP_INI='/etc/php5/php.ini' \
@@ -29,10 +29,11 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 		php5-pdo_odbc \
 		php5-pdo_dblib \
 		php5-gettext \
-		php5-memcache \
 		php5-iconv \
 		php5-ctype \
 		php5-phar \
+		php5-redis \
+		php5-memcached \
 	# config
 	&& echo -e "[global] \
 		\n error_log = /proc/self/fd/2 \
