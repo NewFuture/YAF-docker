@@ -7,8 +7,9 @@ LABEL Name="YAF-docker" Description="mimimal docker image for PHP${VER_NUM} YAF"
 ENV PORT=80 \
 	TIMEZONE=UTC \
 	MAX_UPLOAD=50M \
-    PHP_INI="/etc/php${VER_NUM}/php.ini"
-
+	DISPLAY_ERROR=1 \
+	STARTUP_ERROR=1 \
+	PHP_INI="/etc/php${VER_NUM}/php.ini"
 #ENV_FOR_FPM
 
 # instal PHP
@@ -49,9 +50,7 @@ RUN	PHP_CONF="/etc/php${VER_NUM}/conf.d" \
 
 #COPY build extensions 
 COPY ./modules/*.so /usr/lib/php${VER_NUM}/modules/
-
 COPY entry.sh /entry.sh
-
 
 WORKDIR /yaf
 
@@ -59,4 +58,4 @@ EXPOSE $PORT
 
 ENTRYPOINT [ "/entry.sh" ]
 
-CMD php -S 0.0.0.0:$PORT $([ ! -f index.php ]&&[ -d public ]&&echo '-t public')
+#CMD

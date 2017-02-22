@@ -1,11 +1,15 @@
 #!/bin/sh
 
-# FPM_CONF=/etc/php5/php-fpm.conf
+# CONFIG FPM
 echo -e "[global] \n error_log = /proc/self/fd/2 \n include = ${FPM_PATH}/*.conf " > ${FPM_CONF}
 
-if [ !-f "$FPM_PATH/www.conf" ] ; then
 
-    ADD_CONF(){ echo "$*">> $FPM_PATH/www.conf}
+ADD_CONF(){ 
+    echo "$*">> ${FPM_PATH}www.conf
+}
+
+if [ ! -f "${FPM_PATH}www.conf" ] ; then
+
 
     ADD_CONF [www] \
     && ADD_CONF user = $FPM_USER \
