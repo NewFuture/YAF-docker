@@ -6,12 +6,13 @@ LABEL Name="YAF-docker" Description="mimimal docker image for PHP${VER_NUM} YAF"
 # Environments
 ENV PORT=80 \
 	TIMEZONE=UTC \
-	MAX_UPLOAD=50M 
+	MAX_UPLOAD=50M \
+    PHP_INI="/etc/php${VER_NUM}/php.ini"
+# FPM
 
 # instal PHP
-RUN	PHP_INI="/etc/php${VER_NUM}/php.ini" \
-	&& PHP_CONF="/etc/php${VER_NUM}/conf.d" \
-	&& apk add --no-cache ${PHP_PKG}\
+RUN	PHP_CONF="/etc/php${VER_NUM}/conf.d" \
+    && apk add --no-cache ${PHP_PKG}\
 		libmemcached-libs \
 	#php and ext
 		php${VER_NUM}-mcrypt \
@@ -31,15 +32,6 @@ RUN	PHP_INI="/etc/php${VER_NUM}/php.ini" \
 		php${VER_NUM}-ctype \
 		php${VER_NUM}-phar \
 	# Set php.ini
-	&& CHANGE_INI(){ \
-		if [ $(cat ${PHP_INI} | grep -c "^\s*$1") -eq 0 ] ;\
-		then echo "$1=$2" >> ${PHP_INI} ;\ 
-		else sed -i "s/^\s*$1.*$/$1=$2/" ${PHP_INI}; fi; } \
-	&& CHANGE_INI date.timezone ${TIMEZONE} \
-	&& CHANGE_INI upload_max_filesize ${MAX_UPLOAD} \
-	&& CHANGE_INI cgi.fix_pathinfo 0 \
-	&& CHANGE_INI display_errors 1 \
-	&& CHANGE_INI display_startup_errors 1 \
 	&& ADD_EXT(){ echo -e "extension = ${1}.so; \n${2}" > "$PHP_CONF/${1}.ini"; } \
 	&& ADD_EXT redis \
 	&& ADD_EXT memcached \
@@ -57,8 +49,13 @@ RUN	PHP_INI="/etc/php${VER_NUM}/php.ini" \
 #COPY build extensions 
 COPY ./modules/*.so /usr/lib/php${VER_NUM}/modules/
 
+COPY entry.sh /entry.sh
+
+
 WORKDIR /yaf
 
 EXPOSE $PORT
-	
+
+ENTRYPOINT /entry.sh
+
 CMD php -S 0.0.0.0:$PORT $([ ! -f index.php ]&&[ -d public ]&&echo '-t public')

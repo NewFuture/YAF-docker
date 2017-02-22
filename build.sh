@@ -9,4 +9,8 @@ docker run -it --rm -v"$CLI_PATH/":/newfuture/yaf/ $TAG_NAME
 
 # build Dockerfile
 
-sed -e 's/${VER_NUM}/5/' -e 's/${PHP_PKG}/php5-cli/' template/cli.Dockerfile > "$CLI_PATH/Dockerfile"
+sed -e 's/${VER_NUM}/5/' \
+    -e 's/${PHP_PKG}/php5-cli php5-memcache/' \
+    template/cli.Dockerfile > "$CLI_PATH/Dockerfile"
+
+cp script/entry.sh $CLI_PATH
