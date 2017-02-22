@@ -10,7 +10,7 @@ ENV PORT=9000 \
 	DISPLAY_ERROR=1 \
 	STARTUP_ERROR=1 \
 	PHP_INI="/etc/php5/php.ini"
-ENV FPM_USER=www FPM_CONF=/etc/php5/php-fpm.conf FPM_PATH='/etc/php5/fpm-conf.d/'
+ENV FPM_USER=www FPM_CONF=/etc/php5/php-fpm.conf FPM_PATH='/etc/php5/fpm.d/'
 
 # instal PHP
 RUN	PHP_CONF="/etc/php5/conf.d" \
