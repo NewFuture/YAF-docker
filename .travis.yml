@@ -14,13 +14,13 @@ before_script:
 # 下面替换成运行生成命令或者脚本
 script:
   - ./build.sh $PHP
-  - docker build -t newfuture/yaf:$PHP docker/$PHP/cli
-  - docker build -t newfuture/yaf:fpm-$PHP docker/$PHP/fpm
+  - docker build -t "newfuture/yaf:$PHP" "docker/$PHP/cli"
+  - docker build -t "newfuture/yaf:fpm-$PHP" "docker/$PHP/fpm"
 
 
 # 环境设置
 env:
- matrix:
+  matrix:
     - PHP=php5
     - PHP=php7
   global: # 使用secure加密方式添加secure字段
