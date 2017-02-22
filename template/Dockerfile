@@ -7,8 +7,9 @@ LABEL Name="YAF-docker" Description="mimimal docker image for PHP${VER_NUM} YAF"
 ENV PORT=80 \
 	TIMEZONE=UTC \
 	MAX_UPLOAD=50M \
-	#ENV_FOR_FPM
     PHP_INI="/etc/php${VER_NUM}/php.ini"
+
+#ENV_FOR_FPM
 
 # instal PHP
 RUN	PHP_CONF="/etc/php${VER_NUM}/conf.d" \
