@@ -1,7 +1,6 @@
 FROM alpine
 
-ENV TMP="/tmp/" \
-    DIR="/newfuture/yaf" \
+ENV DIR="/newfuture/yaf" \
     PHP="php5"
 
 WORKDIR $DIR
@@ -27,12 +26,14 @@ RUN apk add \
         "${PHP}" \
         "${PHP}-dev"
 
-RUN  BUILD(){ \
+RUN  TMP="/tmp/" &&\
+     BUILD(){ \
         curl -#SL https://pecl.php.net/get/$1.tgz | tar zx -C $TMP \
         && cd "$TMP/$1" && phpize5 &&./configure --with-php-config=php-config5 && make test && make install \
-        && cp /$TMP/$1/modules/*.so $DIR;} \
-        && BUILD redis-3.1.1 \
-        && BUILD yaf-2.3.5 \
-        && BUILD memcached-2.2.0
+        && cp ${TMP}$1/modules/*.so /modules/;} \
+    && mkdir /modules/ \
+    && BUILD redis-3.1.1 \
+    && BUILD yaf-2.3.5 \
+    && BUILD memcached-2.2.0
 
-CMD cp -R $DIR/* /modules/
+CMD cp -R /modules/* "$DIR"

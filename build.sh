@@ -9,9 +9,9 @@ mkdir -p docker/php5/cli
 
 docker build -t $TAG_NAME "./$1/modules/"
 
-docker run -it --rm -v"$OUT_PATH":/modules/ $TAG_NAME
+docker run -it --rm -v"$OUT_PATH":/newfuture/yaf/ $TAG_NAME
 
-sudo chown -R $USER $OUT_PATH
+# chown -R $USER $OUT_PATH
 ls -al docker/
 ls -al $OUT_PATH 
 
