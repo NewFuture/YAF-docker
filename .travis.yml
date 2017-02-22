@@ -13,10 +13,16 @@ before_script:
 
 # 下面替换成运行生成命令或者脚本
 script:
-  - ./build.sh php5
+  - ./build.sh $PHP
+  - docker build -t newfuture/yaf:$PHP docker/$PHP/cli
+  - docker build -t newfuture/yaf:fpm-$PHP docker/$PHP/fpm
+
 
 # 环境设置
 env:
+ matrix:
+    - PHP=php5
+    - PHP=php7
   global: # 使用secure加密方式添加secure字段
     - BUILD_PATH: "docker" #the build folder to deploy[生成发布的目录] 
     - GIT_AUTHOR_NAME: "NewFuture" #username[用户名]

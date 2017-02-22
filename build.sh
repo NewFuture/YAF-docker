@@ -42,7 +42,7 @@ sed -e 's/${VER_NUM}/5/g' \
 sed -e 's/${VER_NUM}/5/g' \
     -e 's/${PHP_PKG}/php5-fpm/' \
     -e 's/PORT=80/PORT=9000/' \
-    -e "s,#ENV_FOR_FPM,ENV FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm-conf.d/'," \
+    -e "s,#ENV_FOR_FPM,ENV FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm.d/'," \
     template/Dockerfile > "$FPM_PATH/Dockerfile"
 else
     sed -e 's/${VER_NUM}/7/g' \
