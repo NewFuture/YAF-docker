@@ -42,7 +42,7 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 	&& CHANGE_INI cgi.fix_pathinfo 0 \
 	&& CHANGE_INI display_errors 1 \
 	&& CHANGE_INI display_startup_errors 1 \
-	&& ADD_EXT(){ echo -e "extension = ${1}.so; \n${2}" > "$PHP_CONF/90_${1}.ini"; } \
+	&& ADD_EXT(){ echo -e "extension = ${1}.so; \n${2}" > "$PHP_CONF/${1}.ini"; } \
 	&& ADD_EXT redis \
 	&& ADD_EXT memcached \
 	&& ADD_EXT yaf "[yaf]\nyaf.environ = dev" \
@@ -57,7 +57,7 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 		/usr/include/*
 
 #COPY build extensions 
-COPY fpm/modules/*.so /usr/lib/php5/modules/
+COPY ../modules/*.so /usr/lib/php5/modules/
 
 WORKDIR /newfuture/yaf
 
