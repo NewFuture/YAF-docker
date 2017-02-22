@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 CHANGE_INI(){
     if [ $(cat ${PHP_INI} | grep -c "^\s*$1") -eq 0 ] ;
