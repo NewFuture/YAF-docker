@@ -36,4 +36,4 @@ RUN  TMP="/tmp/" &&\
     && BUILD yaf-2.3.5 \
     && BUILD memcached-2.2.0
 
-CMD cp -R /modules/* "$DIR"
+CMD cp -R /modules "$DIR"

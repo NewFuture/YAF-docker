@@ -1,19 +1,10 @@
 #!/bin/sh
 
-OUT_PATH="$(pwd)/docker/$1/modules"
 TAG_NAME="newfuture_$1"
-mkdir -p "$OUT_PATH"
-mkdir -p docker/php5/cli
-
-# docker run -it --rm -v"$(pwd)/$1":/run/ alpine /run/buildext.sh
+CLI_PATH="$(pwd)/docker/$1/cli/"
+mkdir -p "$CLI_PATH"
 
 docker build -t $TAG_NAME "./$1/modules/"
+docker run -it --rm -v"$CLI_PATH/":/newfuture/yaf/ $TAG_NAME
 
-docker run -it --rm -v"$OUT_PATH":/newfuture/yaf/ $TAG_NAME
-
-# chown -R $USER $OUT_PATH
-ls -al docker/
-ls -al $OUT_PATH 
-
-
-cp php5/Dockerfile docker/php5/cli/
+cp $1/Dockerfile $CLI_PATH
