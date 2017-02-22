@@ -21,7 +21,7 @@ RUN apk add \
         cyrus-sasl-dev
 
 RUN apk add ${PHP_PKG} \
-        PHP${VER_NUM}-dev
+    php${VER_NUM}-dev
 
 RUN  TMP="/tmp/" &&\
      BUILD(){ \
