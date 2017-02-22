@@ -7,4 +7,6 @@ mkdir -p "$CLI_PATH"
 docker build -t $TAG_NAME "./$1/modules/"
 docker run -it --rm -v"$CLI_PATH/":/newfuture/yaf/ $TAG_NAME
 
-cp $1/Dockerfile $CLI_PATH
+# build Dockerfile
+
+sed -e 's/${VER_NUM}/5/' -e 's/${PHP_PKG}/php5-cli/' template/cli.Dockerfile > "$CLI_PATH/Dockerfile"
