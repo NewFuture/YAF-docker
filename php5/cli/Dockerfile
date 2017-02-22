@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER New Future <docker@newfuture.cc>
 
-LABEL Name="YAF-docker" Description="mimimal docker image for PHP YAF"
+LABEL Name="YAF-docker" Description="mimimal docker image for PHP5 YAF"
 
 # Environments
 ENV PORT=80 \
@@ -9,9 +9,9 @@ ENV PORT=80 \
 	MAX_UPLOAD=50M 
 
 # instal PHP
-RUN	PHP_INI='/etc/php5/php.ini' \
-	&& PHP_CONF='/etc/php5/conf.d' \
-	&& apk add --no-cache \
+RUN	PHP_INI="/etc/php5/php.ini" \
+	&& PHP_CONF="/etc/php5/conf.d" \
+	&& apk add --no-cache php5-cli\
 		libmemcached-libs \
 	#php and ext
 		php5-mcrypt \
@@ -27,11 +27,9 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 		php5-pdo_odbc \
 		php5-pdo_dblib \
 		php5-gettext \
-		php5-memcache \
 		php5-iconv \
 		php5-ctype \
 		php5-phar \
-		php5-cli\
 	# Set php.ini
 	&& CHANGE_INI(){ \
 		if [ $(cat ${PHP_INI} | grep -c "^\s*$1") -eq 0 ] ;\
@@ -57,9 +55,9 @@ RUN	PHP_INI='/etc/php5/php.ini' \
 		/usr/include/*
 
 #COPY build extensions 
-COPY ../modules/*.so /usr/lib/php5/modules/
+COPY ./modules/*.so /usr/lib/php5/modules/
 
-WORKDIR /newfuture/yaf
+WORKDIR /yaf
 
 EXPOSE $PORT
 	
