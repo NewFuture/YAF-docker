@@ -1,11 +1,11 @@
 #Reference from https://github.com/NewFuture/travis-page
 sudo: required
+language: bash
 
 services:
   - docker
 
 # 一下基本设置
-# language: 语言如python,ruby,node_js
 # dist: trusty (Ubuntu 16.04)
 
 before_script:
@@ -86,4 +86,4 @@ before_install:
 notifications:
   email:
     on_failure: change
-    on_success: change
+    on_success: never
