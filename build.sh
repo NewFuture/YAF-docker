@@ -19,7 +19,7 @@ else
 sed -e 's/${VER_NUM}/7/g' \
     -e 's/${PHP_PKG}/php7 php7-session/' \
     -e 's/${YAF}/3.0.4/' \
-    -e 's/${MEMCACHED}/memcached-3.0.3/' \
+    -e 's/${MEMCACHED}/memcached-3.0.2/' \
     template/modules > $TMP_PATH/Dockerfile
 fi
 
