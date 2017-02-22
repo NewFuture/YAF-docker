@@ -14,7 +14,7 @@ ENV FPM_USER=www FPM_CONF=/etc/php5/php-fpm.conf FPM_PATH='/etc/php5/fpm-conf.d/
 
 # instal PHP
 RUN	PHP_CONF="/etc/php5/conf.d" \
-    && apk add --no-cache php5-fpm php5-memcache\
+    && apk add --no-cache php5-fpm\
 		libmemcached-libs \
 	#php and ext
 		php5-mcrypt \
@@ -58,4 +58,5 @@ EXPOSE $PORT
 
 ENTRYPOINT [ "/entry.sh" ]
 
-#CMDCMD ["/usr/bin/php-fpm","-F"]
+#CMD
+CMD ["/usr/bin/php-fpm","-F"]

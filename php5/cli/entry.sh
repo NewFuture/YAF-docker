@@ -11,5 +11,6 @@ CHANGE_INI(){
 [ "${MAX_UPLOAD}" ] && CHANGE_INI upload_max_filesize ${MAX_UPLOAD}
 [ "${DISPLAY_ERROR}" ] && CHANGE_INI display_errors ${DISPLAY_ERROR}
 [ "${STARTUP_ERROR}" ] && CHANGE_INI display_startup_errors ${STARTUP_ERROR}
+[ "${ASSERTIONS}" ] && CHANGE_INI zend.assertions ${ASSERTIONS}
 
 exec "$@"

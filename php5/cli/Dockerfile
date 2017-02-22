@@ -14,7 +14,7 @@ ENV PORT=80 \
 
 # instal PHP
 RUN	PHP_CONF="/etc/php5/conf.d" \
-    && apk add --no-cache php5-cli php5-memcache\
+    && apk add --no-cache php5-cli\
 		libmemcached-libs \
 	#php and ext
 		php5-mcrypt \
@@ -58,4 +58,5 @@ EXPOSE $PORT
 
 ENTRYPOINT [ "/entry.sh" ]
 
-#CMDCMD  php -S 0.0.0.0:$PORT $([ ! -f index.php ]&&[ -d public ]&&echo "-t public")
+#CMD
+CMD  php -S 0.0.0.0:$PORT $([ ! -f index.php ]&&[ -d public ]&&echo "-t public")
