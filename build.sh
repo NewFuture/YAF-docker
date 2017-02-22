@@ -52,7 +52,7 @@ else
     sed -e 's/${VER_NUM}/7/g' \
         -e 's/${PHP_PKG}/php7-fpm/' \
         -e 's/PORT=80/PORT=9000/' \
-        -e "s,#ENV_FOR_FPM,ENV FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm-conf.d/'," \
+        -e "s,#ENV_FOR_FPM,ENV FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm.d/'," \
         template/Dockerfile > "$FPM_PATH/Dockerfile"
 fi
 
