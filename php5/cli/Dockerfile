@@ -60,3 +60,4 @@ EXPOSE $PORT
 ENTRYPOINT [ "/entry.sh" ]
 
 CMD php -S 0.0.0.0:$PORT $([ ! -f index.php ]&&[ -d public ]&&echo '-t public')
+CMD  php -S 0.0.0.0:$PORT $([ ! -f index.php ]&&[ -d public ]&&echo "-t public")
