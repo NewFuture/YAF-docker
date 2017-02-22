@@ -1,11 +1,15 @@
 #!/bin/sh
 
-# FPM_CONF=/etc/php5/php-fpm.conf
+# CONFIG FPM
 echo -e "[global] \n error_log = /proc/self/fd/2 \n include = ${FPM_PATH}/*.conf " > ${FPM_CONF}
 
-if [ !-f "$FPM_PATH/www.conf" ] ; then
 
-    ADD_CONF(){ echo "$*">> $FPM_PATH/www.conf}
+ADD_CONF(){ 
+    echo "$*">> ${FPM_PATH}www.conf
+}
+
+if [ ! -f "${FPM_PATH}www.conf" ] ; then
+
 
     ADD_CONF [www] \
     && ADD_CONF user = $FPM_USER \
@@ -22,17 +26,16 @@ if [ !-f "$FPM_PATH/www.conf" ] ; then
 fi
 #!/bin/sh
 set -e
-
+#conf PHP
 CHANGE_INI(){
     if [ $(cat ${PHP_INI} | grep -c "^\s*$1") -eq 0 ] ;
         then echo "$1=$2" >> ${PHP_INI}
         else sed -i "s/^\s*$1.*$/$1=$2/" ${PHP_INI}
     fi
 }
+[ "${TIMEZONE}" ] && CHANGE_INI date.timezone ${TIMEZONE}
+[ "${MAX_UPLOAD}" ] && CHANGE_INI upload_max_filesize ${MAX_UPLOAD}
+[ "${DISPLAY_ERROR}" ] && CHANGE_INI display_errors ${DISPLAY_ERROR}
+[ "${STARTUP_ERROR}" ] && CHANGE_INI display_startup_errors ${STARTUP_ERROR}
 
-CHANGE_INI date.timezone ${TIMEZONE} \
-&& CHANGE_INI upload_max_filesize ${MAX_UPLOAD} \
-&& CHANGE_INI cgi.fix_pathinfo 0 \
-&& CHANGE_INI display_errors 1 \
-&& CHANGE_INI display_startup_errors 1 \
-&& exec "$@"
+exec "$@"

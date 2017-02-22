@@ -7,8 +7,9 @@ LABEL Name="YAF-docker" Description="mimimal docker image for PHP5 YAF"
 ENV PORT=9000 \
 	TIMEZONE=UTC \
 	MAX_UPLOAD=50M \
-    PHP_INI="/etc/php5/php.ini"
-
+	DISPLAY_ERROR=1 \
+	STARTUP_ERROR=1 \
+	PHP_INI="/etc/php5/php.ini"
 ENV FPM_USER=www FPM_CONF=/etc/php5/php-fpm.conf FPM_PATH='/etc/php5/fpm-conf.d/'
 
 # instal PHP
@@ -49,9 +50,7 @@ RUN	PHP_CONF="/etc/php5/conf.d" \
 
 #COPY build extensions 
 COPY ./modules/*.so /usr/lib/php5/modules/
-
 COPY entry.sh /entry.sh
-
 
 WORKDIR /yaf
 
@@ -59,5 +58,4 @@ EXPOSE $PORT
 
 ENTRYPOINT [ "/entry.sh" ]
 
-CMD php -S 0.0.0.0:$PORT $([ ! -f index.php ]&&[ -d public ]&&echo '-t public')
-CMD ["/usr/bin/php-fpm","-F"]
+#CMDCMD ["/usr/bin/php-fpm","-F"]
