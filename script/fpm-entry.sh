@@ -1,16 +1,10 @@
 #!/bin/sh
-
 # CONFIG FPM
 echo -e "[global] \n error_log = /proc/self/fd/2 \n include = ${FPM_PATH}/*.conf " > ${FPM_CONF}
-
-
 ADD_CONF(){ 
     echo "$*">> ${FPM_PATH}www.conf
 }
-
 if [ ! -f "${FPM_PATH}www.conf" ] ; then
-
-
     ADD_CONF [www] \
     && ADD_CONF user = $FPM_USER \
     && ADD_CONF group = $FPM_USER \
@@ -24,3 +18,5 @@ if [ ! -f "${FPM_PATH}www.conf" ] ; then
     && ADD_CONF clear_env = no \
     && ADD_CONF catch_workers_output = yes
 fi
+addgroup -g 82 -S $FPM_USE
+adduser -u 82 -D -S -G $FPM_USER $FPM_USER
