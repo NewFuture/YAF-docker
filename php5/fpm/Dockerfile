@@ -4,16 +4,16 @@ MAINTAINER New Future <docker@newfuture.cc>
 LABEL Name="YAF-docker" Description="mimimal docker image for PHP5 YAF"
 
 # Environments
-ENV PORT=80 \
+ENV PORT=9000 \
 	TIMEZONE=UTC \
 	MAX_UPLOAD=50M \
     PHP_INI="/etc/php5/php.ini"
 
-#ENV_FOR_FPM
+ENV FPM_USER=www FPM_CONF=/etc/php5/php-fpm.conf FPM_PATH='/etc/php5/fpm-conf.d/'
 
 # instal PHP
 RUN	PHP_CONF="/etc/php5/conf.d" \
-    && apk add --no-cache php5-cli php5-memcache\
+    && apk add --no-cache php5-fpm php5-memcache\
 		libmemcached-libs \
 	#php and ext
 		php5-mcrypt \
