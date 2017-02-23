@@ -9,8 +9,8 @@ ENV PORT=80 \
 	MAX_UPLOAD=50M \
 	DISPLAY_ERROR=1 \
 	STARTUP_ERROR=1 \
+	ASSERTIONS=0 \
 	PHP_INI="/etc/php7/php.ini"
-#ENV_FOR_FPM
 
 # instal PHP
 RUN	PHP_CONF="/etc/php7/conf.d" \
@@ -38,7 +38,7 @@ RUN	PHP_CONF="/etc/php7/conf.d" \
 	&& ADD_EXT redis \
 	&& ADD_EXT memcached \
 	&& ADD_EXT yaf "[yaf]\nyaf.environ = dev" \
-	&& ln -s /usr/bin/php7 /usr/local/bin/php \
+	&& ln -s /usr/bin/php7 /usr/bin/php \
 	&& rm -rf /var/cache/apk/* \
 		/var/tmp/* \
 		/tmp/* \
