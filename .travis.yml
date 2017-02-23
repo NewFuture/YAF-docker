@@ -30,7 +30,7 @@ env:
     # - secure: (encrypted string: GH_TOKEN=xxx])
     # auto generation and detection 默认下面变量会自动配置GIT变量
     - GIT_REF: "$(git ls-remote --get-url)" #git地址默认当前仓库，可修改为其他仓库
-    - GIT_ADD_PARAMS: "." #git add参数或者跟踪的文件[.]只增不删[-u]只删改不增[-A]全部
+    - GIT_ADD_PARAMS: "$PHP" #git add参数或者跟踪的文件[.]只增不删[-u]只删改不增[-A]全部
     - GIT_AUTHOR_EMAIL: "${GIT_AUTHOR_NAME}@users.noreply.github.com"
     - GIT_COMMITTER_NAME: "${GIT_AUTHOR_NAME}"
     - GIT_COMMITTER_EMAIL: "${GIT_COMMITTER_NAME}@users.noreply.github.com"
