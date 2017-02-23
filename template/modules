@@ -8,7 +8,7 @@ VOLUME ["/home/newfuture/docker/YAF-docker/modules","$DIR"]
 RUN apk update && apk upgrade
 
 RUN apk add \
-        curl \
+        ca-certificates \
         autoconf \
         pkgconf \
         file \
@@ -24,8 +24,9 @@ RUN apk add ${PHP_PKG} \
     php${VER_NUM}-dev
 
 RUN  TMP="/tmp/" &&\
+     update-ca-certificates &&\
      BUILD(){ \
-        curl -#SL https://pecl.php.net/get/$1.tgz | tar zx -C $TMP \
+        wget -O- https://pecl.php.net/get/$1.tgz | tar zx -C $TMP \
         && cd "$TMP/$1" && "phpize${VER_NUM}" &&./configure --with-php-config="php-config${VER_NUM}" && make test && make install \
         && cp ${TMP}$1/modules/*.so /modules/;} \
     && mkdir /modules/ \
