@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER New Future <docker@newfuture.cc>
 
-LABEL Name="YAF-docker" Description="mimimal docker image for PHP7 YAF"
+LABEL Name="YAF-docker" Description="mimimal docker image for PHP5 YAF"
 
 # Environments
 ENV PORT=9000 \
@@ -9,30 +9,30 @@ ENV PORT=9000 \
 	MAX_UPLOAD=50M \
 	DISPLAY_ERROR=1 \
 	STARTUP_ERROR=1 \
-	PHP_INI="/etc/php7/php.ini"
-ENV FPM_USER=www FPM_CONF=/etc/php7/php-fpm.conf FPM_PATH='/etc/php7/fpm.d/'
+	PHP_INI="/etc/php5/php.ini"
+ENV FPM_USER=www FPM_CONF=/etc/php5/php-fpm.conf FPM_PATH='/etc/php5/fpm.d/'
 
 # instal PHP
-RUN	PHP_CONF="/etc/php7/conf.d" \
-    && apk add --no-cache php7-fpm php7-session\
+RUN	PHP_CONF="/etc/php5/conf.d" \
+    && apk add --no-cache php5-fpm\
 		libmemcached-libs \
 	#php and ext
-		php7-mcrypt \
-		php7-openssl \
-		php7-curl \
-		php7-json \
-		php7-dom \
-		php7-bcmath \
-		php7-gd \
-		php7-pdo \
-		php7-pdo_mysql \
-		php7-pdo_sqlite \
-		php7-pdo_odbc \
-		php7-pdo_dblib \
-		php7-gettext \
-		php7-iconv \
-		php7-ctype \
-		php7-phar \
+		php5-mcrypt \
+		php5-openssl \
+		php5-curl \
+		php5-json \
+		php5-dom \
+		php5-bcmath \
+		php5-gd \
+		php5-pdo \
+		php5-pdo_mysql \
+		php5-pdo_sqlite \
+		php5-pdo_odbc \
+		php5-pdo_dblib \
+		php5-gettext \
+		php5-iconv \
+		php5-ctype \
+		php5-phar \
 	# Set php.ini
 	&& ADD_EXT(){ echo -e "extension = ${1}.so; \n${2}" > "$PHP_CONF/${1}.ini"; } \
 	&& ADD_EXT redis \
@@ -49,7 +49,7 @@ RUN	PHP_CONF="/etc/php7/conf.d" \
 		/usr/include/*
 
 #COPY build extensions 
-COPY ./modules/*.so /usr/lib/php7/modules/
+COPY ./modules/*.so /usr/lib/php5/modules/
 COPY entry.sh /entry.sh
 
 WORKDIR /yaf
