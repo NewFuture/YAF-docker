@@ -9,8 +9,8 @@ ENV PORT=80 \
 	MAX_UPLOAD=50M \
 	DISPLAY_ERROR=1 \
 	STARTUP_ERROR=1 \
+	#MORE_ENV \
 	PHP_INI="/etc/php5/php.ini"
-#ENV_FOR_FPM
 
 # instal PHP
 RUN	PHP_CONF="/etc/php5/conf.d" \

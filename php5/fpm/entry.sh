@@ -5,6 +5,7 @@ ADD_CONF(){
     echo "$*">> ${FPM_PATH}www.conf
 }
 if [ ! -f "${FPM_PATH}www.conf" ] ; then
+    mkdir -p ${FPM_PATH}
     ADD_CONF [www] \
     && ADD_CONF user = $FPM_USER \
     && ADD_CONF group = $FPM_USER \
