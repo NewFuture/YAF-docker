@@ -8,28 +8,30 @@
 
 based on alpine (the mini size docke image)
 
-### php5 [![](https://images.microbadger.com/badges/image/newfuture/yaf:php5.6.svg)](https://microbadger.com/images/newfuture/yaf:php5.6 "Get your own image badge on microbadger.com")
 
-* include extensions:
-    - [YAF-2.3.5](https://github.com/laruence/yaf)
-    - redis-3.1.0
-    - memcached
-    - memcache
-    - PDO-*
-    - mcrypt
-    - curl
-    - gd
+### ALL IMAGES:
 
-### php7 [![](https://images.microbadger.com/badges/image/newfuture/yaf:php7.svg)](https://microbadger.com/images/newfuture/yaf:php7 "Get your own image badge on microbadger.com")
+* [![](https://images.microbadger.com/badges/image/newfuture/yaf:php7.svg)](https://microbadger.com/images/newfuture/yaf:php7) [php7](https://github.com/NewFuture/YAF-docker/tree/docker/php5/cli/)
+* [![](https://images.microbadger.com/badges/image/newfuture/yaf:fpm-php7.svg)](https://microbadger.com/images/newfuture/yaf:fpm-php7) [fpm-php7](https://github.com/NewFuture/YAF-docker/blob/docker/php7/fpm/)
+* [![](https://images.microbadger.com/badges/image/newfuture/yaf:php5.svg)](https://microbadger.com/images/newfuture/yaf:php5) [php5](https://github.com/NewFuture/YAF-docker/tree/docker/php5/cli/)
+* [![](https://images.microbadger.com/badges/image/newfuture/yaf:fpm-php5.svg)](https://microbadger.com/images/newfuture/yaf:fpm-php5) [fpm-php5](https://github.com/NewFuture/YAF-docker/blob/docker/php7/fpm/)
 
-* include extensions:
-    - [YAF-3.0.4](https://github.com/laruence/yaf)
-    - redis-3.1.0
-    - PDO-*
-    - mcrypt
-    - curl
-    - gd
+### include the latest php extensions:
+- [YAF](https://github.com/laruence/yaf)
+- php-memcached
+- php-redis
+- PDO-*
+- mcrypt
+- curl
+- gd
 
+## Environment var
+
+* `TIMEZONE`（UTC） for `date.timezone`
+* `MAX_UPLOAD`(50M) for `upload_max_filesize`
+* `DISPLAY_ERROR`(1) for `display_errors`
+* `STARTUP_ERROR`(1) for `display_startup_errors`
+* `ASSERTIONS`(0) for `zend.assertions`, only php7 supported
 
 ## Usage
 
@@ -39,13 +41,13 @@ docker pull newfuture/yaf
 ```
 * run your yaf app : replace `"/PATH/OF/YAF/APP/"` with your app path , and it will auto detect public path (if exist `public folder` and not exist `index.php` ,use the `public` as web root)
 ```bash
-docker run --name yaf -p 1122:80 -v "/PATH/OF/YAF/APP/":/newfuture/yaf newfuture/yaf
+docker run -it --rm -p 1122:80 -v "/PATH/OF/YAF/APP/":/yaf newfuture/yaf
 ```
 * just test some php code 
 ```bash
 docker run -it --rm newfuture/yaf php -a
 ```
-* using php7
+* using php5
 ```bash
-docker run -it --rm -p 1122:80 -v "`pwd`":/newfuture/yaf newfuture/yaf:php7
+docker run -it --rm -p 1122:80 -v "`pwd`":/yaf newfuture/yaf:php5
 ```

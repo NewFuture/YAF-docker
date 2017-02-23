@@ -42,19 +42,20 @@ sed -e 's/${VER_NUM}/5/g' \
 sed -e 's/${VER_NUM}/5/g' \
     -e 's/${PHP_PKG}/php5-fpm/' \
     -e 's/PORT=80/PORT=9000/' \
-    -e "s,#ENV_FOR_FPM,ENV FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm.d/'," \
+    -e "s,#MORE_ENV,ENV FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm.d/'," \
     template/Dockerfile > "$FPM_PATH/Dockerfile"
 else #php7
     sed -e 's/${VER_NUM}/7/g' \
         -e 's/${PHP_PKG}/php7 php7-session/' \
-        -e 's,#ClEAN_TAG,\&\& ln -s /usr/bin/php7 /usr/local/bin/php,' \
+        -e "s,#MORE_ENV,ENV ASSERTIONS=0," \
+        -e 's,#ClEAN_TAG,\&\& ln -s /usr/bin/php7 /usr/bin/php,' \
         template/Dockerfile > "$CLI_PATH/Dockerfile"
 
     sed -e 's/${VER_NUM}/7/g' \
         -e 's/${PHP_PKG}/php7-fpm php7-session/' \
         -e 's/PORT=80/PORT=9000/' \
-        -e 's,#ClEAN_TAG,\&\& ln -s /usr/sbin/php-fpm7 /usr/local/bin/php-fpm,' \
-        -e "s,#ENV_FOR_FPM,ENV FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm.d/'," \
+        -e "s,#MORE_ENV,ENV ASSERTIONS=0 FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm.d/'," \
+        -e 's,#ClEAN_TAG,\&\& ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm,' \
         template/Dockerfile > "$FPM_PATH/Dockerfile"
 fi
 
