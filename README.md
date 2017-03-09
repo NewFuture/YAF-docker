@@ -27,11 +27,13 @@ PHP YAF images based on alpine (the mini docker image which is about 1.8MB after
 
 ## Environment var
 
-* `TIMEZONE`（UTC） for `date.timezone`
-* `MAX_UPLOAD`(50M) for `upload_max_filesize`
-* `DISPLAY_ERROR`(1) for `display_errors`
-* `STARTUP_ERROR`(1) for `display_startup_errors`
-* `ASSERTIONS`(0) for `zend.assertions`, only php7 supported
+| VAR | default | description |
+| -- | -- | -- |
+| `TIMEZONE` | UTC | for `date.timezone` setting ini php.ini |
+|`MAX_UPLOAD` | 50M | `upload_max_filesize` setting |
+|`DISPLAY_ERROR`| 1 | `display_errors` to show php errors |
+|`STARTUP_ERROR`| 1 | `display_startup_errors` to display statrtup errors|
+|`ASSERTIONS` | 0 | `zend.assertions`, only php7 supported: -1 close, 1 open|
 
 ## Usage
 
