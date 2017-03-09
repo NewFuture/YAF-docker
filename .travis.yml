@@ -63,7 +63,7 @@ after_success:
     else
       git checkout -b ${GH_BRANCH};
     fi;
-  - git add $PHP
+  - git add README.md $PHP
   - git commit -m"build $(date -I)[skip ci]" &&git push new HEAD:${GH_BRANCH} -q
 
 
