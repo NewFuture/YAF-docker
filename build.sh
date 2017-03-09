@@ -63,3 +63,5 @@ fi
 echo 'CMD ["/usr/bin/php-fpm","-F"]'>>"$FPM_PATH/Dockerfile"
 
 echo 'CMD  php -S 0.0.0.0:$PORT $([ ! -f index.php ]&&[ -d public ]&&echo "-t public")'>>"$CLI_PATH/Dockerfile"
+
+cp README.md docker/
