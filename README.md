@@ -9,7 +9,7 @@
 PHP YAF images based on alpine (the mini docker image which is about 1.8MB after compressed !)
 
 
-### ALL IMAGES:
+### all images:
 
 * [![](https://images.microbadger.com/badges/image/newfuture/yaf:php7.svg)](https://microbadger.com/images/newfuture/yaf:php7) [`php7` (latest)](https://github.com/NewFuture/YAF-docker/tree/docker/php5/cli/)
 * [![](https://images.microbadger.com/badges/image/newfuture/yaf:fpm-php7.svg)](https://microbadger.com/images/newfuture/yaf:fpm-php7) [`fpm-php7`](https://github.com/NewFuture/YAF-docker/blob/docker/php7/fpm/)
@@ -28,7 +28,7 @@ PHP YAF images based on alpine (the mini docker image which is about 1.8MB after
 ## Environment var
 
 | VAR | default | description |
-| -- | -- | -- |
+| --- | --- | --- |
 | `TIMEZONE` | UTC | for `date.timezone` setting ini php.ini |
 |`MAX_UPLOAD` | 50M | `upload_max_filesize` setting |
 |`DISPLAY_ERROR`| 1 | `display_errors` to show php errors |
@@ -44,11 +44,11 @@ docker pull newfuture/yaf:fpm
 ```
 * run your yaf app : replace `"/PATH/OF/YAF/APP/"` with your app path , and it will auto detect public path (if exist `public folder` and not exist `index.php` ,use the `public` as web root)
 ```bash
-docker run -it --rm -p 1122:80 -v "/PATH/OF/YAF/APP/":/yaf newfuture/yaf
+docker run -it --rm -p 1122:80 -v "`pwd`":/yaf newfuture/yaf
 ```
-* just test some php code 
+* run in background
 ```bash
-docker run -it --rm newfuture/yaf php -a
+docker run -d -p 1122:80 -v "`pwd`":/yaf newfuture/yaf
 ```
 * using php5
 ```bash
