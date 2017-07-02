@@ -48,7 +48,7 @@ else #php7
     sed -e 's/${VER_NUM}/7/g' \
         -e 's/${PHP_PKG}/php7 php7-session/' \
         -e "s,#MORE_ENV,ASSERTIONS=0," \
-        -e 's,#ClEAN_TAG,\&\& ln -s /usr/bin/php7 /usr/bin/php,' \
+        -e 's,#ClEAN_TAG' \
         template/Dockerfile > "$CLI_PATH/Dockerfile"
 
     sed -e 's/${VER_NUM}/7/g' \
