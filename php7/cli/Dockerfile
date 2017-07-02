@@ -38,7 +38,7 @@ RUN	PHP_CONF="/etc/php7/conf.d" \
 	&& ADD_EXT redis \
 	&& ADD_EXT memcached \
 	&& ADD_EXT yaf "[yaf]\nyaf.environ = dev" \
-	&& ln -s /usr/bin/php7 /usr/bin/php \
+	#ClEAN_TAG \
 	&& rm -rf /var/cache/apk/* \
 		/var/tmp/* \
 		/tmp/* \
