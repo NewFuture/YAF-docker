@@ -8,12 +8,12 @@ FPM_PATH="$(pwd)/docker/$1/fpm/"
 TMP_PATH="/tmp/$1/"
 APK_PKG="$1"
 PHP_EXT='yaf-3.0.5'
-ADD_EXT=''
+ADD_EXT='#ADD_EXT'
 
 if [ "$1" = "php5" ]; then
 PHP_VER="5"
-PHP_EXT='yaf-2.3.5 && BUILD memcached-2.2.0 && BUILD redis-3.1.4 '
-ADD_EXT='&& ADD_EXT redis && ADD_EXT memcached'
+PHP_EXT='yaf-2.3.5 \&\& BUILD memcached-2.2.0 \&\& BUILD redis-3.1.4 '
+ADD_EXT='\&\& ADD_EXT redis \&\& ADD_EXT memcached'
 CLI_PKG="php5-cli "
 FPM_PKG="php5-fpm "
 else
@@ -44,14 +44,14 @@ cat script/entry.sh >> "$FPM_PATH/entry.sh"
 sed -e "s/\${VER_NUM}/${PHP_VER}/g" \
     -e "s/\${PHP_PKG}/${CLI_PKG}/" \
     -e "s,#MORE_ENV,ASSERTIONS=0," \
-    -e "s,#ADD_EXT,${ADD_EXT}," \
+    -e "s/#ADD_EXT/${ADD_EXT}/" \
     template/Dockerfile > "$CLI_PATH/Dockerfile"
 
 sed -e "s/\${VER_NUM}/${PHP_VER}/g" \
     -e "s/\${PHP_PKG}/${FPM_PKG}/" \
     -e 's/PORT=80/PORT=9000/' \
     -e "s,#MORE_ENV,ASSERTIONS=0 FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm.d/'," \
-    -e "s/#ADD_EXT/${ADD_EXT}/" \
+    -e "s,#ADD_EXT,${ADD_EXT}," \
     template/Dockerfile > "$FPM_PATH/Dockerfile"
 
     # -e 's,#ClEAN_TAG,\&\& ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm,' \
