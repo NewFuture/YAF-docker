@@ -14,7 +14,7 @@ ENV PORT=9000 \
 
 # instal PHP
 RUN	PHP_CONF="/etc/php7/conf.d" \
-    && apk add --no-cache php7-fpm php7-session\
+    && apk add --no-cache php7 php7-session php7-memcached php7-redis  php7-fpm\
 		libmemcached-libs \
 	#php and ext
 		php7-mcrypt \
@@ -38,7 +38,7 @@ RUN	PHP_CONF="/etc/php7/conf.d" \
 	&& ADD_EXT redis \
 	&& ADD_EXT memcached \
 	&& ADD_EXT yaf "[yaf]\nyaf.environ = dev" \
-	&& ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm \
+	#ClEAN_TAG \
 	&& rm -rf /var/cache/apk/* \
 		/var/tmp/* \
 		/tmp/* \

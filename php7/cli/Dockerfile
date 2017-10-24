@@ -14,7 +14,7 @@ ENV PORT=80 \
 
 # instal PHP
 RUN	PHP_CONF="/etc/php7/conf.d" \
-    && apk add --no-cache php7 php7-session\
+    && apk add --no-cache php7 php7-session php7-memcached php7-redis \
 		libmemcached-libs \
 	#php and ext
 		php7-mcrypt \
