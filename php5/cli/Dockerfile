@@ -35,8 +35,7 @@ RUN	PHP_CONF="/etc/php5/conf.d" \
 		php5-phar \
 	# Set php.ini
 	&& ADD_EXT(){ echo -e "extension = ${1}.so; \n${2}" > "$PHP_CONF/${1}.ini"; } \
-	&& ADD_EXT redis \
-	&& ADD_EXT memcached \
+	&& ADD_EXT redis && ADD_EXT memcached \
 	&& ADD_EXT yaf "[yaf]\nyaf.environ = dev" \
 	#ClEAN_TAG \
 	&& rm -rf /var/cache/apk/* \
