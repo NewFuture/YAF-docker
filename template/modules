@@ -29,8 +29,6 @@ RUN  TMP="/tmp/" &&\
         && cd "$TMP/$1" && "phpize${VER_NUM}" &&./configure --with-php-config="php-config${VER_NUM}" && make test && make install \
         && cp ${TMP}$1/modules/*.so /modules/;} \
     && mkdir /modules/ \
-    && BUILD redis-3.1.1 \
-    && BUILD ${YAF} \
-    && BUILD ${MEMCACHED}
+    && BUILD ${EXT}
 
 CMD cp -R /modules "$DIR"
