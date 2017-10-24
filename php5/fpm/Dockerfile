@@ -9,12 +9,12 @@ ENV PORT=9000 \
 	MAX_UPLOAD=50M \
 	DISPLAY_ERROR=1 \
 	STARTUP_ERROR=1 \
-	FPM_USER=www FPM_CONF=/etc/php5/php-fpm.conf FPM_PATH='/etc/php5/fpm.d/' \
+	ASSERTIONS=0 FPM_USER=www FPM_CONF=/etc/php5/php-fpm.conf FPM_PATH='/etc/php5/fpm.d/' \
 	PHP_INI="/etc/php5/php.ini"
 
 # instal PHP
 RUN	PHP_CONF="/etc/php5/conf.d" \
-    && apk add --no-cache php5-fpm\
+    && apk add --no-cache php5-fpm \
 		libmemcached-libs \
 	#php and ext
 		php5-mcrypt \

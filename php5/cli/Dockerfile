@@ -9,12 +9,12 @@ ENV PORT=80 \
 	MAX_UPLOAD=50M \
 	DISPLAY_ERROR=1 \
 	STARTUP_ERROR=1 \
-	#MORE_ENV \
+	ASSERTIONS=0 \
 	PHP_INI="/etc/php5/php.ini"
 
 # instal PHP
 RUN	PHP_CONF="/etc/php5/conf.d" \
-    && apk add --no-cache php5-cli\
+    && apk add --no-cache php5-cli \
 		libmemcached-libs \
 	#php and ext
 		php5-mcrypt \
