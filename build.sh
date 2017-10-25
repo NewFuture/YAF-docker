@@ -9,6 +9,7 @@ TMP_PATH="/tmp/$1/"
 APK_PKG="$1"
 PHP_EXT='yaf-3.0.5'
 ADD_EXT='#ADD_EXT'
+PRE_FPM='#ClEAN_TAG'
 
 if [ "$1" = "php5" ]; then
 PHP_VER="5"
@@ -21,6 +22,7 @@ PHP_VER="7"
 APK_PKG="${APK_PKG} php7-session php7-memcached php7-redis "
 CLI_PKG="${APK_PKG}"
 FPM_PKG="${APK_PKG} php7-fpm"
+PRE_FPM='\&\& ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm'
 fi
 
 mkdir -p "$CLI_PATH" "$FPM_PATH" "$TMP_PATH"
@@ -52,9 +54,9 @@ sed -e "s/\${VER_NUM}/${PHP_VER}/g" \
     -e 's/PORT=80/PORT=9000/' \
     -e "s,#MORE_ENV,ASSERTIONS=0 FPM_USER=www FPM_CONF=/etc/$1/php-fpm.conf FPM_PATH='/etc/$1/fpm.d/'," \
     -e "s,#ADD_EXT,${ADD_EXT}," \
+    -e "s,#ClEAN_TAG,${PRE_FPM}," \
     template/Dockerfile > "$FPM_PATH/Dockerfile"
 
-    # -e 's,#ClEAN_TAG,\&\& ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm,' \
 
 
 echo 'CMD ["/usr/bin/php-fpm","-F"]'>>"$FPM_PATH/Dockerfile"
