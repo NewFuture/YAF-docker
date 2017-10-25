@@ -37,7 +37,7 @@ RUN	PHP_CONF="/etc/php7/conf.d" \
 	&& ADD_EXT(){ echo -e "extension = ${1}.so; \n${2}" > "$PHP_CONF/${1}.ini"; } \
 	#ADD_EXT \
 	&& ADD_EXT yaf "[yaf]\nyaf.environ = dev" \
-	#ClEAN_TAG \
+	&& ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm \
 	&& rm -rf /var/cache/apk/* \
 		/var/tmp/* \
 		/tmp/* \
