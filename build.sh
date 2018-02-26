@@ -22,8 +22,9 @@ PHP_VER="7"
 APK_PKG="${APK_PKG} php7-session php7-memcached php7-redis "
 CLI_PKG="${APK_PKG}"
 FPM_PKG="${APK_PKG} php7-fpm"
-PRE_FPM='\&\& ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm'
 fi
+
+PRE_FPM="\&\& ln -s /usr/sbin/php-fpm${PHP_VER} /usr/bin/php-fpm"
 
 mkdir -p "$CLI_PATH" "$FPM_PATH" "$TMP_PATH"
 
