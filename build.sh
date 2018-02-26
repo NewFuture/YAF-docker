@@ -17,13 +17,13 @@ PHP_EXT='yaf-2.3.5 \&\& BUILD memcached-2.2.0 \&\& BUILD redis-3.1.4 '
 ADD_EXT='\&\& ADD_EXT redis \&\& ADD_EXT memcached'
 CLI_PKG="php5-cli "
 FPM_PKG="php5-fpm "
-PRE_FPM="\&\& ln -s /usr/sbin/php-fpm${PHP_VER} /usr/bin/php-fpm"
+PRE_FPM="\&\& ln -s /usr/bin/php-fpm${PHP_VER} /usr/bin/php-fpm"
 else
 PHP_VER="7"
 APK_PKG="${APK_PKG} php7-session php7-memcached php7-redis "
 CLI_PKG="${APK_PKG}"
 FPM_PKG="${APK_PKG} php7-fpm"
-PRE_FPM="\&\& ln -s /usr/bin/php-fpm${PHP_VER} /usr/bin/php-fpm"
+PRE_FPM="\&\& ln -s /usr/sbin/php-fpm${PHP_VER} /usr/bin/php-fpm"
 fi
 
 mkdir -p "$CLI_PATH" "$FPM_PATH" "$TMP_PATH"
